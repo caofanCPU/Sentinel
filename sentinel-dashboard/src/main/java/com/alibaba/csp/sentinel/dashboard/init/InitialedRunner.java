@@ -48,6 +48,7 @@ public class InitialedRunner implements CommandLineRunner, ApplicationListener<W
         // 非生产环境都打印环境信息
         if (!PROD_ENV_KEY.equals(springActiveProfile)) {
             log.info("项目启动成功, 配置环境[{}], IP=[{}], Port=[{}]", configEnv, this.serverIp, serverPort);
+            log.info("主页访问地址: http://{}:{}/", this.serverIp, serverPort);
         }
     }
 
