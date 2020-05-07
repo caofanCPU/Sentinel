@@ -15,9 +15,6 @@
  */
 package com.alibaba.csp.sentinel.adapter.spring.webmvc;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import com.alibaba.csp.sentinel.Entry;
 import com.alibaba.csp.sentinel.EntryType;
 import com.alibaba.csp.sentinel.ResourceTypeConstants;
@@ -29,9 +26,11 @@ import com.alibaba.csp.sentinel.log.RecordLog;
 import com.alibaba.csp.sentinel.slots.block.BlockException;
 import com.alibaba.csp.sentinel.util.AssertUtil;
 import com.alibaba.csp.sentinel.util.StringUtil;
-
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 /**
  * @author kaizi2009
@@ -59,8 +58,8 @@ public abstract class AbstractSentinelInterceptor implements HandlerInterceptor 
             if (StringUtil.isNotEmpty(resourceName)) {
                 // Parse the request origin using registered origin parser.
                 String origin = parseOrigin(request);
-                String contextName = getContextName(request);
-                ContextUtil.enter(contextName, origin);
+//                String contextName = getContextName(request);
+                ContextUtil.enter(resourceName, origin);
                 Entry entry = SphU.entry(resourceName, ResourceTypeConstants.COMMON_WEB, EntryType.IN);
 
                 setEntryInRequest(request, baseWebMvcConfig.getRequestAttributeName(), entry);
