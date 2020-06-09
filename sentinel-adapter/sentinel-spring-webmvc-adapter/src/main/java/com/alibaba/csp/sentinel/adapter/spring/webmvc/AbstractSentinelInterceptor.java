@@ -58,8 +58,8 @@ public abstract class AbstractSentinelInterceptor implements HandlerInterceptor 
             if (StringUtil.isNotEmpty(resourceName)) {
                 // Parse the request origin using registered origin parser.
                 String origin = parseOrigin(request);
-//                String contextName = getContextName(request);
-                ContextUtil.enter(resourceName, origin);
+                String contextName = getContextName(request);
+                ContextUtil.enter(contextName, origin);
                 Entry entry = SphU.entry(resourceName, ResourceTypeConstants.COMMON_WEB, EntryType.IN);
 
                 setEntryInRequest(request, baseWebMvcConfig.getRequestAttributeName(), entry);
